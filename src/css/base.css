@@ -6,4 +6,33 @@ body {
   min-width: 320px;
   padding-top: 1rem;
   padding-bottom: 2.4rem;
+  margin: 0 auto !important;
 }
+
+a.router-link-exact-active {
+  color: coral
+}
+.router-link-active {
+  color: steelblue
+}
+
+/* 登录按钮 */
+.login-btn {
+  background-color: #c30;
+  line-height: 1.5rem;
+}
+
+/* 登录页大图标 */
+.icon-spe-color {color: #d81e06;}
+
+/* 错误信息span标签样式 */
+.error-msg {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  color: orangered;
+}
+
+/* 检测格式后的input框样式 */
+input.error { border-color: salmon; }
+input.success { border-color: forestgreen; }
