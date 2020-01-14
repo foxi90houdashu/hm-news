@@ -1,0 +1,9 @@
+html {
+  background-color: #fafafa;
+}
+body {
+  max-width: 750px;
+  min-width: 320px;
+  padding-top: 1rem;
+  padding-bottom: 2.4rem;
+}
