@@ -1,11 +1,12 @@
 module.exports = {
   theme: {
     fontSize: {
-      '12': '.375rem',
-      '14': '.44rem',
-      '16': '.5rem',
-      '18': '.56rem',
-      '20': '.625rem',
+      '12': '.32rem',
+      '14': '.373rem',
+      '16': '.4267rem',
+      '18': '.48rem',
+      '20': '.5333rem',
+      '24': '.64rem',
       'xs': '.75rem',
       'sm': '.875rem',
       'tiny': '.875rem',
@@ -18,6 +19,17 @@ module.exports = {
       '5xl': '3rem',
       '6xl': '4rem',
       '7xl': '5rem'
+    },
+    extend: {
+      lineHeight: {
+        '3': '0.75rem',
+        '4': '1rem',
+        '5': '1.25rem',
+        '6': '1.5rem'
+      },
+      height: {
+        '18': '4.5rem'
+      }
     }
   }
 }

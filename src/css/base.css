@@ -4,8 +4,8 @@ html {
 body {
   max-width: 750px;
   min-width: 320px;
-  padding-top: 1rem;
-  padding-bottom: 2.4rem;
+  padding-top: .8rem;
+  padding-bottom: 1.4rem;
   margin: 0 auto !important;
 }
 
@@ -36,3 +36,42 @@ a.router-link-exact-active {
 /* 检测格式后的input框样式 */
 input.error { border-color: salmon; }
 input.success { border-color: forestgreen; }
+
+/* 弥补tailwind没有translate50%及定位50% */
+.translateXY {
+  transform: translate(-50%, -50%);
+}
+.translateX50 {
+  transform: translateX(50%);
+}
+.translateX {
+  transform: translateX(-50%);
+}
+.translateY {
+  transform: translateY(-50%);
+}
+.top50 {
+  top: 50%;
+}
+.left50 {
+  left: 50%;
+}
+
+/* 首页分类tab栏背景色 */
+.van-tab {
+  background-color: #eaeaea;
+}
+
+/* 公共类补充 */
+.text-999 {
+  color: #999;
+}
+.text-pure-red {
+  color: red;
+}
+.text-pure-green {
+  color: lightgreen;
+}
+.bg-pure-red {
+  background-color: red;
+}

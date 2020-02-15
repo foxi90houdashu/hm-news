@@ -10,6 +10,9 @@ module.exports = {
   plugins: [
     require('tailwindcss'),
     require('autoprefixer'),
+    require('postcss-px2rem')({
+      remUnit: 37.5
+    }),
     ...process.env.NODE_ENV === 'production'
       ? [purgecss]
       : []

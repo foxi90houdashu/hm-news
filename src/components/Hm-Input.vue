@@ -45,11 +45,12 @@ export default {
     handleInput (e) {
       let { value } = e.target
       this.status = this.rules.test(value) ? 'success' : 'error'
+      this.$emit('input', value)
 
-      // 如果检测格式正确, 传输入的值, 格式错误, 传值为空
-      if (this.status === 'success') {
-        this.$emit('input', value)
-      } else { this.$emit('input', '') }
+      // 如果检测格式正确, 传输入的值
+      // if (this.status === 'success') {
+      //   this.$emit('input', value)
+      // }
     }
   }
 }

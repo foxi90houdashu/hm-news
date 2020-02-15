@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div @click="login" class="login-btn h-6 text-gray-100 rounded-full text-18 block">登录</div>
+    <div @click="login" class="login-btn h-6 text-gray-100 rounded-full text-18 block"><slot></slot></div>
   </div>
 </template>
 

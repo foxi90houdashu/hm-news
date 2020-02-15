@@ -20,15 +20,12 @@
     </div>
 
     <!-- 登录按钮 -->
-    <hm-btn @click="login"></hm-btn>
+    <hm-btn @click="login">登录</hm-btn>
+    <span class="text-14">没有账号?去<router-link to="/register" class="text-teal-600 border-b border-dashed border-teal-600">注册</router-link></span>
   </div>
 </template>
 
 <script>
-import HmInput from '@/components/Hm-Input'
-import HmBtn from '@/components/Hm-Btn'
-import axios from 'axios'
-
 export default {
   data () {
     return {
@@ -36,20 +33,36 @@ export default {
       pwd: ''
     }
   },
-  components: {
-    'hm-input': HmInput,
-    'hm-btn': HmBtn
-  },
   methods: {
     async login () {
-      if (!(this.username && this.pwd)) { return console.log('wrong axios') }
+      let successStatus = true
+      let allErrTag = document.querySelectorAll('.error-msg')
 
-      const res = await axios.post('http://localhost:3000/login', {
-        username: this.username,
-        password: this.password
+      allErrTag.forEach((item) => {
+        if (item.style.display !== 'none') {
+          successStatus = false
+        }
       })
 
-      res.data.statusCode === 401 ? alert('登录失败') : alert('登录成功')
+      if (successStatus && this.username && this.pwd) {
+        const res = await this.$axios.post('/login', {
+          username: this.username,
+          password: this.pwd
+        })
+
+        if (res.data.statusCode === 401) {
+          this.$toast.fail(res.data.message)
+        } else {
+          this.$toast.success('登录成功, 即将跳转至个人信息页面')
+
+          // 处理用户token
+          const { token, user } = res.data.data
+          localStorage.setItem('token', token)
+          localStorage.setItem('user_id', user.id)
+
+          setTimeout(() => { this.$router.push('/userinfo') }, 600)
+        }
+      } else { this.$toast.fail('请输入正确的登录信息') }
     }
   }
 }
