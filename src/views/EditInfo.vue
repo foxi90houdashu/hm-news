@@ -125,10 +125,8 @@ export default {
 
       const res = await this.$axios.post(`/user_update/${userId}`, postData)
 
-      if (res.data.statusCode === 200) {
-        this.$toast.success(res.data.message)
-        this.getProfile()
-      }
+      this.$toast.success(res.data.message)
+      this.getProfile()
     },
 
     // 点击头像后, 显示裁剪遮罩层
@@ -153,10 +151,8 @@ export default {
         })
 
         // 如果上传成功, head_img赋值(制造post数据), 再发请求修改图片
-        if (res.data.statusCode === 200) {
-          this.head_img = res.data.data.url
-          this.changeInfo('head_img')
-        }
+        this.head_img = res.data.data.url
+        this.changeInfo('head_img')
 
         this.isShowMask = false
       })

@@ -44,9 +44,9 @@ export default {
     // 获取栏目
     async getTabList () {
       const res = await this.$axios.get('/category')
-      const { statusCode, data } = res.data
+      const { data } = res.data
 
-      this.activeTabs = statusCode === 200 ? data : []
+      this.activeTabs = data
     },
     // 变成不活跃项
     del (index) {

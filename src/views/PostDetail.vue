@@ -22,7 +22,7 @@
       </div>
 
       <!-- 视频类的详情 -->
-      <div class="video" v-if="detail.type === 2">
+      <div class="video" v-if="detail.type === 2 && detail.content.startsWith('http')">
         <video :src="detail.content" controls></video>
       </div>
 
@@ -113,31 +113,22 @@ export default {
       const id = this.$route.params.id
       const res = await this.$axios.get(`/post/${id}`)
 
-      const { statusCode, data } = res.data
-
-      if (statusCode === 200) {
-        this.detail = data
-      }
+      const { data } = res.data
+      this.detail = data
     },
     // 获取评论列表
     async getCommentList () {
       const id = this.$route.params.id
       const res = await this.$axios.get(`/post_comment/${id}`)
 
-      const { statusCode, data } = res.data
-
-      if (statusCode === 200) {
-        this.commentList = data
-      }
+      const { data } = res.data
+      this.commentList = data
     },
     // 切换点赞状态
     async toggleLike () {
       const id = this.detail.id // 文章id
-      const res = await this.$axios.get(`/post_like/${id}`)
-
-      if (res.data.statusCode === 200) {
-        this.getPostDetail()
-      }
+      await this.$axios.get(`/post_like/${id}`)
+      this.getPostDetail()
     },
     // 切换关注状态
     async toggleFollow (status) {
@@ -155,12 +146,9 @@ export default {
         }
       }
       // 发请求改关注状态
-      const res = await this.$axios.get(followDict[status].url)
-
-      if (res.data.statusCode === 200) {
-        this.$toast.success(followDict[status].msg) // 操作成功提示框
-        this.detail.has_follow = !this.detail.has_follow // 关注状态取反
-      }
+      await this.$axios.get(followDict[status].url)
+      this.$toast.success(followDict[status].msg) // 操作成功提示框
+      this.detail.has_follow = !this.detail.has_follow // 关注状态取反
     },
     // 获取input焦点后, 显示文本域
     async showTextarea (tag, cleanParenIdTag) {
@@ -173,12 +161,9 @@ export default {
       const id = this.detail.id
       const res = await this.$axios.get(`/post_star/${id}`)
 
-      const { statusCode, message } = res.data
-
-      if (statusCode === 200) {
-        this.$toast.success(message)
-        this.getPostDetail()
-      }
+      const { message } = res.data
+      this.$toast.success(message)
+      this.getPostDetail()
     },
     // 回复评论功能
     reply (id) {
@@ -189,20 +174,18 @@ export default {
     async sendComment (e) {
       e.preventDefault()
       const id = this.detail.id // 文章id
-      const res = await this.$axios.post(`/post_comment/${id}`, {
+      await this.$axios.post(`/post_comment/${id}`, {
         content: this.replyMsg,
         parent_id: this.parentId
       })
 
       // 评论发表成功后, 重新渲染评论列表 => 隐藏文本域 => 清空文本域内容
-      if (res.data.statusCode === 200) {
-        this.$toast.success('评论发布成功')
-        this.getCommentList()
-        this.detail.comment_length++
-        this.isFocus = 1
-        this.content = ''
-        this.parentId = ''
-      }
+      this.$toast.success('评论发布成功')
+      this.getCommentList()
+      this.detail.comment_length++
+      this.isFocus = 1
+      this.content = ''
+      this.parentId = ''
     }
   },
 

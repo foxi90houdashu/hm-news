@@ -2,7 +2,7 @@
   <div class="px-2 text-center font-sans">
     <!-- 叉号 -->
     <div class="text-left pt-1">
-      <span class="iconfont iconicon-test text-sm"></span>
+      <span class="iconfont iconicon-test text-sm" @click="$router.push('/')"></span>
     </div>
     <!-- new图标 -->
     <div class="leading-tight">

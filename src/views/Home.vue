@@ -74,9 +74,8 @@ export default {
         this.tabList = JSON.parse(activeTabs)
       } else {
         const res = await this.$axios.get('/category')
-        const { statusCode, data } = res.data
-
-        this.tabList = statusCode === 200 ? data : []
+        const { data } = res.data
+        this.tabList = data
       }
     },
 
@@ -84,6 +83,7 @@ export default {
     async getPostList () {
       this.activeTab = this.tabList[this.activeIndex]
       // 获取分类id后, 发请求
+
       const id = this.activeTab.id
       const res = await this.$axios.get('/post', {
         params: {
@@ -93,12 +93,11 @@ export default {
         }
       })
 
-      const { statusCode, data } = res.data
+      const { data } = res.data
 
-      if (statusCode === 200) {
-        // 文章数据缓存在分类的postList内
-        this.postList = [...this.postList, ...data]
-      }
+      // 文章数据缓存在分类的postList内
+      this.postList = [...this.postList, ...data]
+
       // 关闭vant的Loading和refresh状态
       this.loading = false
       this.refreshing = false

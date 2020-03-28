@@ -42,8 +42,13 @@ export default {
         Authorization: token
       }
     })
-    this.profile = res.data.data
-    this.loading = true
+
+    if (res.data.statusCode === 401) {
+      this.$toast('用户验证失败')
+    } else {
+      this.profile = res.data.data
+      this.loading = true
+    }
   },
   data () {
     return {

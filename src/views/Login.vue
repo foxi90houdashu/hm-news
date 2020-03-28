@@ -2,7 +2,7 @@
   <div class="px-2 text-center font-sans">
     <!-- 叉号 -->
     <div class="text-left pt-1">
-      <span class="iconfont iconicon-test text-sm"></span>
+      <span class="iconfont iconicon-test text-sm" @click="$router.push('/')"></span>
     </div>
     <!-- new图标 -->
     <div class="leading-tight">
@@ -60,7 +60,7 @@ export default {
           localStorage.setItem('token', token)
           localStorage.setItem('user_id', user.id)
 
-          setTimeout(() => { this.$router.push('/userinfo') }, 600)
+          setTimeout(() => { this.$router.replace('/userinfo') }, 600)
         }
       } else { this.$toast.fail('请输入正确的登录信息') }
     }

@@ -26,8 +26,8 @@ export default {
     // 获取关注列表
     async getFollowList () {
       const res = await this.$axios.get('/user_follows')
-      const { data, statusCode } = res.data
-      statusCode === 200 ? this.follow_list = data : console.log('')
+      const { data } = res.data
+      this.follow_list = data
     },
     // 取关
     async unfollow (id) {
@@ -38,8 +38,8 @@ export default {
         })
 
         // 取关请求
-        const res = await this.$axios.get(`/user_unfollow/${id}`)
-        res.data.statusCode === 200 ? this.$toast.success('取关成功') : console.log('')
+        await this.$axios.get(`/user_unfollow/${id}`)
+        this.$toast.success('取关成功')
 
         // 重新获取关注列表
         this.getFollowList()

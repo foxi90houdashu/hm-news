@@ -57,14 +57,13 @@ export default {
         }
       })
 
-      const { statusCode, data } = res.data
-      if (statusCode === 200) {
-        this.commentList = [...this.commentList, ...data]
-        // 关闭vant加载开关, 下次拉到最底会再加载数据
-        this.loading = false
-        // 关于最后一页的判断
-        data.length < this.pageSize ? this.finished = true : console.log('')
-      }
+      const { data } = res.data
+
+      this.commentList = [...this.commentList, ...data]
+      // 关闭vant加载开关, 下次拉到最底会再加载数据
+      this.loading = false
+      // 关于最后一页的判断
+      data.length < this.pageSize ? this.finished = true : console.log('')
     }
   }
 }

@@ -24,14 +24,12 @@ export default {
   methods: {
     async getFavoriteList () {
       const res = await this.$axios.get('/user_star')
-      const { statusCode, data } = res.data
+      const { data } = res.data
 
-      if (statusCode === 200) {
-        data.forEach(item => {
-          item.comment_length = item.comments.length
-        })
-        this.list = data
-      }
+      data.forEach(item => {
+        item.comment_length = item.comments.length
+      })
+      this.list = data
     }
   }
 }

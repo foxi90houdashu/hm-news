@@ -53,6 +53,11 @@ Vue.filter('time', function (input, format = 'YYYY-MM-DD') {
   return moment(input).format(format)
 })
 
+Vue.prototype.$fixUrl = function (url) {
+  url = url.startsWith('http') ? url : axios.defaults.baseURL + url
+  return url
+}
+
 new Vue({
   router,
   render: h => h(App)

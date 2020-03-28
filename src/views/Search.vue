@@ -54,27 +54,25 @@ export default {
         params: { keyword: this.keyword }
       })
 
-      const { statusCode, data } = res.data
+      const { data } = res.data
 
       // 得到搜索结果列表, 存history
-      if (statusCode === 200) {
-        // 没有结果的时候, keyword='', 所有用个变量存起来防止keyword存不到history
-        let temKey = this.keyword
+      // 没有结果的时候, keyword='', 所有用个变量存起来防止keyword存不到history
+      let temKey = this.keyword
 
-        // 如果没有结果, 给个提示信息并清空keyword
-        if (data.length) {
-          this.postList = data
-        } else {
-          this.$toast('无搜索结果')
-          this.keyword = ''
-        }
-
-        // 把搜索词存到history里
-        this.history = this.history.filter(item => item !== temKey)
-        this.history.unshift(temKey)
-
-        localStorage.setItem('history', JSON.stringify(this.history))
+      // 如果没有结果, 给个提示信息并清空keyword
+      if (data.length) {
+        this.postList = data
+      } else {
+        this.$toast('无搜索结果')
+        this.keyword = ''
       }
+
+      // 把搜索词存到history里
+      this.history = this.history.filter(item => item !== temKey)
+      this.history.unshift(temKey)
+
+      localStorage.setItem('history', JSON.stringify(this.history))
     },
     // 返回按钮
     back () {
