@@ -1,24 +1,8 @@
-# hm-news
+# hm-news （mobile news app）
 
-## Project setup
-```
-yarn install
-```
+## Vue + tailwind + Vant
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+#### 概述：用户可根据类别查看文字及视频新闻。可搜索新闻，评论，回复楼层，以下列出主要页面及技术点：
+* 首页（新闻列表，设有不同类别）：Vant list组件懒加载新闻列表。
+* 新闻详情页（新闻详情）：评论，递归组件实现评论楼层。
+* 用户页（个人信息、关注、收藏管理）：vue-cropper裁剪头像并上传。
